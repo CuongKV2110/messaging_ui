@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:messaging/presentation/chat_detail/widgets/member_widget.dart';
 import 'package:messaging/presentation/resources/dimensions.dart';
@@ -16,7 +15,7 @@ class BookmarksWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
           Padding(
@@ -126,48 +125,46 @@ class BookmarksWidget extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Container(
-              child: Column(
-                children: [
-                  Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
+            child: Column(
+              children: [
+                Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: AppColors.white,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(18, 12, 18, 12),
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.chat,
+                          color: AppColors.blue1,
+                        ),
+                        SizedBox(
+                          width: 18,
+                        ),
+                        Text('4 Channels'),
+                        Spacer(),
+                        Icon(
+                          Icons.keyboard_arrow_down,
+                          color: AppColors.text_secondary,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                Container(
+                  height: AppDimensions.d50h,
+                  decoration: BoxDecoration(
                       color: AppColors.white,
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(18, 12, 18, 12),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.chat,
-                            color: AppColors.blue1,
-                          ),
-                          SizedBox(
-                            width: 18,
-                          ),
-                          Text('4 Channels'),
-                          Spacer(),
-                          Icon(
-                            Icons.keyboard_arrow_down,
-                            color: AppColors.text_secondary,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 24,
-                  ),
-                  Container(
-                    height: AppDimensions.d50h,
-                    decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(8)),
-                    child: _buildListPeople(),
-                  ),
-                ],
-              ),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: _buildListPeople(),
+                ),
+              ],
             ),
           ),
         ],
@@ -177,25 +174,25 @@ class BookmarksWidget extends StatelessWidget {
 
   Widget _buildListPeople() {
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Padding(
-        padding: EdgeInsets.fromLTRB(18, 12, 18, 12),
+        padding: const EdgeInsets.fromLTRB(18, 12, 18, 12),
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
+                const Icon(
                   Icons.people_alt_rounded,
                   color: AppColors.blue1,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 18,
                 ),
-                Text('20 Peoples'),
-                Spacer(),
+                const Text('20 Peoples'),
+                const Spacer(),
                 Row(
-                  children: [
+                  children: const [
                     Icon(
                       Icons.person_add_alt,
                       color: AppColors.blue1,
@@ -211,16 +208,16 @@ class BookmarksWidget extends StatelessWidget {
                 ),
               ],
             ),
-            Divider(
+            const Divider(
               color: AppColors.divider,
             ),
             ListView.builder(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  return MemberWidget();
+                  return const MemberWidget();
                 })
           ],
         ),

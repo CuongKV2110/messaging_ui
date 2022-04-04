@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:messaging/presentation/recent_calls_screen/pages/recent_calls_screen.dart';
+import 'package:messaging/presentation/recent_chat_screen/pages/recent_chat_screen.dart';
 import 'package:messaging/presentation/resources/colors.dart';
 import 'package:messaging/presentation/settings_screen/pages/settings_screen.dart';
 import 'package:messaging/presentation/widgets/avatar_widget.dart';
@@ -126,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (_selectedIndex == 0) {
       return const BuildHomeScreen();
     } else if (_selectedIndex == 1) {
-      return const Text('A');
+      return RecentChatScreen();
     } else if (_selectedIndex == 2) {
       return const RecentCallsScreen();
     } else {

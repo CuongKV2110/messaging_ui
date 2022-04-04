@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:messaging/presentation/chat_detail/widgets/bookmarks_widget.dart';
+import 'package:messaging/presentation/chat_detail/widgets/image_widget.dart';
+import 'package:messaging/presentation/chat_detail/widgets/video_widget.dart';
 import 'package:messaging/presentation/resources/colors.dart';
 import 'package:messaging/presentation/resources/dimensions.dart';
 
@@ -193,12 +195,12 @@ class _ChatInfoScreenState extends State<ChatInfoScreen> {
       );
     }
     if (index == 1) {
-      return const Expanded(
-        child: Text('V'),
+      return Expanded(
+        child: ImageWidget(),
       );
     }
     if (index == 2) {
-      return const Expanded(child: Text('Hello2'));
+      return Expanded(child: const VideoWidget());
     } else {
       return const Expanded(child: Text('Hello3'));
     }
