@@ -4,12 +4,12 @@ import 'package:messaging/presentation/resources/colors.dart';
 
 class ChatItemWidget extends StatelessWidget {
   ChatItemWidget({Key? key}) : super(key: key);
-  String text =
-      'Hello my friend. Have a nice day. See you again Heello o ajsao dashd  !';
+  String text = 'Hello my friend. Have a nice day. See you again Heello o ajsao dashd  !';
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        physics: const BouncingScrollPhysics(),
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: 12,
         itemBuilder: (context, index) {
           if (index == 0) {

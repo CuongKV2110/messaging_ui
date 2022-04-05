@@ -4,8 +4,7 @@ import '../../resources/colors.dart';
 import '../../resources/dimensions.dart';
 
 class Chat2Widget extends StatelessWidget {
-  String text =
-      'Yes, Im flying home now and will be back in Liverpool on Thursday';
+  String text = 'Yes, Im flying home now and will be back in Liverpool on Thursday';
 
   @override
   Widget build(BuildContext context) {

@@ -11,14 +11,16 @@ class BuildHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        _buildPinnedChats(),
-        const SizedBox(
-          height: 24,
-        ),
-        _buildRecentChats(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _buildPinnedChats(),
+          const SizedBox(
+            height: 24,
+          ),
+          _buildRecentChats(),
+        ],
+      ),
     );
   }
 
@@ -44,21 +46,13 @@ class BuildHomeScreen extends StatelessWidget {
 
   Widget _buildRecentChats() {
     return Container(
-      width: AppDimensions.d100w,
-      height: AppDimensions.d90h,
       decoration: const BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(16),
           topLeft: Radius.circular(16),
         ),
-        boxShadow: [
-          BoxShadow(
-              color: AppColors.bgr,
-              spreadRadius: 6,
-              blurRadius: 20,
-              offset: Offset(0, 4))
-        ],
+        boxShadow: [BoxShadow(color: AppColors.bgr, spreadRadius: 6, blurRadius: 20, offset: Offset(0, 4))],
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),

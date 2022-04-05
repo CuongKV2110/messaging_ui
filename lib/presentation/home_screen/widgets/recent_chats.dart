@@ -15,21 +15,19 @@ class _RecentChatsWidgetState extends State<RecentChatsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              _buildItem(0, "All chats"),
-              _buildItem(1, "Personal"),
-              _buildItem(2, "Work"),
-              _buildItem(3, "Settings"),
-              const Spacer(),
-            ],
-          ),
-          _buildContent(_currentIndex)
-        ],
-      ),
+    return Column(
+      children: [
+        Row(
+          children: [
+            _buildItem(0, "All chats"),
+            _buildItem(1, "Personal"),
+            _buildItem(2, "Work"),
+            _buildItem(3, "Settings"),
+            const Spacer(),
+          ],
+        ),
+        _buildContent(_currentIndex)
+      ],
     );
   }
 
@@ -53,9 +51,7 @@ class _RecentChatsWidgetState extends State<RecentChatsWidget> {
           child: Center(
             child: Text(
               text,
-              style: TextStyle(
-                  fontSize: 12,
-                  color: active ? AppColors.white : AppColors.text_primary),
+              style: TextStyle(fontSize: 12, color: active ? AppColors.white : AppColors.text_primary),
             ),
           ),
         ),
@@ -65,9 +61,7 @@ class _RecentChatsWidgetState extends State<RecentChatsWidget> {
 
   Widget _buildContent(int index) {
     if (index == 0) {
-      return Expanded(
-        child: ChatItemWidget(),
-      );
+      return ChatItemWidget();
     }
     if (index == 1) {
       return const Expanded(
