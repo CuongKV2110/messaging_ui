@@ -3,29 +3,39 @@ import 'package:flutter/material.dart';
 import 'package:messaging/presentation/resources/colors.dart';
 
 class MemberWidget extends StatelessWidget {
-  const MemberWidget({Key? key}) : super(key: key);
+  late int index;
+
+  MemberWidget(this.index);
+
+  String img1 = 'images/avt6.jpg';
+  String player1 = 'Trent Alexander-Arnold';
+  String img2 = 'images/avt9.jpg';
+  String player2 = 'Sadio Mané';
+  String img3 = 'images/avt10.jpg';
+  String player3 = 'Mohamed Salah';
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Row(
-          children: const [
+          children: [
             CircleAvatar(
-              backgroundImage: AssetImage('images/avt4.jpg'),
+              backgroundImage: AssetImage(
+                  index % 2 == 0 ? img1 : (index == 1 ? img2 : img3)),
             ),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
             Text(
-              "Kai Havertz",
-              style: TextStyle(
+              index % 2 == 0 ? player1 : (index == 1 ? player2 : player3),
+              style: const TextStyle(
                 color: AppColors.text_primary,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Spacer(),
-            Text(
+            const Spacer(),
+            const Text(
               'Member',
               style: TextStyle(
                 color: AppColors.text_secondary,
@@ -34,7 +44,7 @@ class MemberWidget extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
       ],
     );
   }

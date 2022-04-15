@@ -1,13 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:messaging/presentation/chat_detail/pages/chat_info_screen.dart';
 import 'package:messaging/presentation/chat_detail/widgets/chat1_widget.dart';
 import 'package:messaging/presentation/resources/colors.dart';
 import 'package:messaging/presentation/resources/dimensions.dart';
-
-import '../widgets/chat2_widget.dart';
-import '../widgets/chat3_widget.dart';
+import 'package:open_file/open_file.dart';
 import '../widgets/chat4_widget.dart';
 
 class ChatDetailScreen extends StatefulWidget {
@@ -18,6 +18,29 @@ class ChatDetailScreen extends StatefulWidget {
 }
 
 class _ChatDetailScreenState extends State<ChatDetailScreen> {
+  FilePickerResult? result;
+  PlatformFile? file;
+  late bool hide = false;
+
+  void hideImage() {
+    setState(() {
+      hide = true;
+    });
+  }
+
+  void pickFiles() async {
+    result = await FilePicker.platform.pickFiles();
+    if (result == null) return;
+    file = result!.files.first;
+    setState(() {
+      hide = false;
+    });
+  }
+
+  void viewFile(PlatformFile file) {
+    OpenFile.open(file.path);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,6 +49,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Scaffold(
+          backgroundColor: AppColors.white,
           appBar: AppBar(
             centerTitle: false,
             backgroundColor: AppColors.white,
@@ -43,9 +67,14 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                 color: AppColors.text_secondary,
               )
             ],
-            leading: const Icon(
-              Icons.arrow_back,
-              color: AppColors.text_secondary,
+            leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Icon(
+                Icons.arrow_back,
+                color: AppColors.text_secondary,
+              ),
             ),
             titleSpacing: 0,
             title: GestureDetector(
@@ -83,7 +112,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             SizedBox(
               width: 160,
               child: Text(
-                'Liverpool Football Club hasds asdgs',
+                'Liverpool Football Club',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -110,24 +139,28 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   }
 
   Widget _buildBody() {
-    return Container(
-      width: AppDimensions.d100w,
-      height: double.infinity,
-      color: AppColors.white,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            Chat1Widget(),
-            const SizedBox(height: 16),
-            Chat2Widget(),
-            const SizedBox(height: 16),
-            Chat3Widget(),
-            const SizedBox(height: 16),
-            Chat4Widget(),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: ListView(
+        physics: const BouncingScrollPhysics(),
+        children: [
+          Chat1Widget(),
+          const SizedBox(height: 16),
+          const Chat4Widget(),
+          (file == null)
+              ? SizedBox(
+                  height: 10,
+                )
+              : ((hide == true)
+                  ? SizedBox(
+                      height: 10,
+                    )
+                  : Image.file(
+                      File(file!.path.toString()),
+                      width: 200,
+                      height: 200,
+                    ))
+        ],
       ),
     );
   }
@@ -168,23 +201,33 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
               ),
             ),
             const Spacer(),
-            const Icon(
-              Icons.attach_file,
-              color: AppColors.text_primary,
+            GestureDetector(
+              onTap: () {
+                pickFiles();
+              },
+              child: const Icon(
+                Icons.attach_file,
+                color: AppColors.text_primary,
+              ),
             ),
             const SizedBox(
               width: 22,
             ),
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: AppColors.blue1),
-              child: const Icon(
-                Icons.mic,
-                color: AppColors.white,
-                size: 30,
+            GestureDetector(
+              onTap: () {
+                hideImage();
+              },
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: AppColors.blue1),
+                child: const Icon(
+                  Icons.mic,
+                  color: AppColors.white,
+                  size: 30,
+                ),
               ),
             )
           ],

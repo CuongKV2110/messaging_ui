@@ -8,6 +8,8 @@ class PersonalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        physics: BouncingScrollPhysics(),
+        shrinkWrap: true,
         itemCount: 12,
         itemBuilder: (context, index) {
           if (index == 0) {

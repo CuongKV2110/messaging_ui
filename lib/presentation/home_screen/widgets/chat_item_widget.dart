@@ -3,13 +3,17 @@ import 'package:messaging/presentation/chat_detail/pages/chat_detail_screen.dart
 import 'package:messaging/presentation/resources/colors.dart';
 
 class ChatItemWidget extends StatelessWidget {
-  ChatItemWidget({Key? key}) : super(key: key);
-  String text = 'Hello my friend. Have a nice day. See you again Heello o ajsao dashd  !';
+  String img1 = 'images/avt3.jpg';
+  String player1 = 'Frenkie De Jong';
+  String title1 = 'Barca is a famous football club in the world';
+  String img2 = 'images/avt5.jpg';
+  String player2 = 'Sergio Ramos';
+  String title2 = 'PSG will comeback to UEFA C1 2023';
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemCount: 12,
         itemBuilder: (context, index) {
           if (index == 0) {
@@ -24,7 +28,7 @@ class ChatItemWidget extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) {
-                        return ChatDetailScreen();
+                        return const ChatDetailScreen();
                       }),
                     );
                   },
@@ -83,7 +87,13 @@ class ChatItemWidget extends StatelessWidget {
             );
           } else {
             return GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) {
+                    return const ChatDetailScreen();
+                  }),
+                );
+              },
               child: Container(
                 height: 64,
                 decoration: BoxDecoration(
@@ -94,31 +104,32 @@ class ChatItemWidget extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CircleAvatar(
-                        backgroundImage: AssetImage('images/avt3.jpg'),
+                      CircleAvatar(
+                        backgroundImage:
+                            AssetImage(index % 2 == 0 ? img1 : img2),
                       ),
                       const SizedBox(
                         width: 16,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
-                            'Frenkie de Jong',
-                            style: TextStyle(
+                            index % 2 == 0 ? player1 : player2,
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
                               color: AppColors.text_primary,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
                           SizedBox(
                             width: 180,
                             child: Text(
-                              'See you again in next Friday. Im a bit busy right now asgasudgasdgaua ',
-                              style: TextStyle(
+                              index % 2 == 0 ? title1 : title2,
+                              style: const TextStyle(
                                 fontSize: 12,
                                 color: AppColors.text_secondary,
                               ),

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../home_screen/widgets/recent_chats.dart';
 import '../../resources/colors.dart';
-import '../../resources/dimensions.dart';
-import '../widgets/recent_chat_widget.dart';
 
 class RecentChatScreen extends StatefulWidget {
   const RecentChatScreen({Key? key}) : super(key: key);
@@ -12,18 +10,39 @@ class RecentChatScreen extends StatefulWidget {
   _RecentChatScreenState createState() => _RecentChatScreenState();
 }
 
-class _RecentChatScreenState extends State<RecentChatScreen> {
+class _RecentChatScreenState extends State<RecentChatScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+// TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: AppDimensions.d100w,
-      height: AppDimensions.d100h,
-      decoration: const BoxDecoration(
-        color: AppColors.white,
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      appBar: AppBar(
+        backgroundColor: AppColors.white,
+        elevation: 0,
+        title: const Text(
+          'Recent Chats',
+          style: TextStyle(
+            color: AppColors.text_primary,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: const [
+          Icon(
+            Icons.search,
+            color: AppColors.text_secondary,
+          ),
+          SizedBox(
+            width: 27,
+          )
+        ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: RecentChatWidget(),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: RecentChatsWidget(),
       ),
     );
   }

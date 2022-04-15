@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 
 class ImageWidget extends StatelessWidget {
   String img_url1 =
-      'https://pbs.twimg.com/media/DofA44ZW0AAGtcB?format=jpg&name=large';
+      'https://cdnmedia.tinmoi.vn/upload/theanhbtv/2021/10/03/1633234800-2.jpg';
   String img_url2 =
-      'https://www.thetimes.co.uk/imageserver/image/%2Fmethode%2Fsundaytimes%2Fprod%2Fweb%2Fbin%2F4df79c24-9291-11e8-86ee-e22d14bef8b7.jpg?crop=1413%2C1413%2C555%2C58';
+      'https://cdn.bongdaplus.vn/Assets/Media/2019/11/11/41/fabinho1.jpg';
   String img_url3 =
-      'https://taarifa.rw/wp-content/uploads/2021/08/al_bayt_stadium01.jpg';
+      'http://cdn-img.thethao247.vn/upload/hungtm/2018/04/11/truc-tiep-man-city-vs-liverpool-1h45-ngay-11-41523393465.jpg';
   @override
   Widget build(BuildContext context) {
     return Padding(

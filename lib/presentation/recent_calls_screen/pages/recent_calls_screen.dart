@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:messaging/presentation/resources/colors.dart';
 import 'package:messaging/presentation/resources/dimensions.dart';
 
@@ -11,30 +12,46 @@ class RecentCallsScreen extends StatefulWidget {
   _RecentCallsScreenState createState() => _RecentCallsScreenState();
 }
 
-class _RecentCallsScreenState extends State<RecentCallsScreen> {
+class _RecentCallsScreenState extends State<RecentCallsScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+// TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: AppDimensions.d100w,
-      height: AppDimensions.d100h,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            AppColors.white,
-            AppColors.bgr1,
-          ],
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      appBar: AppBar(
+        backgroundColor: AppColors.white,
+        elevation: 0,
+        title: const Text(
+          'Recent Calls',
+          style: TextStyle(
+            color: AppColors.text_primary,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
+        actions: const [
+          Icon(
+            Icons.search,
+            color: AppColors.text_secondary,
+          ),
+          SizedBox(
+            width: 27,
+          )
+        ],
       ),
-      child: _buildRecentCall(),
+      body: _buildRecentCall(),
     );
   }
 
   Widget _buildRecentCall() {
     return ListView.builder(
+        shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
-        itemCount: 6,
+        itemCount: 10,
         itemBuilder: (context, index) {
           return const RecentCallWidget();
         });

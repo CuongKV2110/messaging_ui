@@ -11,7 +11,11 @@ class SettingsScreen extends StatefulWidget {
   _SettingsScreenState createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends State<SettingsScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+// TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
   List<MenuItem> list = [];
   bool isSwitched = false;
 
@@ -28,25 +32,49 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Container(
-        color: AppColors.white,
-        child: Column(
-          children: [
-            buildInfo(),
-            const SizedBox(
-              height: 24,
-            ),
-            const Divider(
-              height: 1,
-              color: AppColors.divider,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            buildMenu(),
-          ],
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      appBar: AppBar(
+        backgroundColor: AppColors.white,
+        elevation: 0,
+        title: const Text(
+          'Settings',
+          style: TextStyle(
+            color: AppColors.text_primary,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: const [
+          Icon(
+            Icons.search,
+            color: AppColors.text_secondary,
+          ),
+          SizedBox(
+            width: 27,
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: Container(
+          color: AppColors.white,
+          child: Column(
+            children: [
+              buildInfo(),
+              const SizedBox(
+                height: 24,
+              ),
+              const Divider(
+                height: 1,
+                color: AppColors.divider,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              buildMenu(),
+            ],
+          ),
         ),
       ),
     );
@@ -54,7 +82,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget buildInfo() {
     return Padding(
-      padding: EdgeInsets.fromLTRB(24, 4, 0, 0),
+      padding: const EdgeInsets.fromLTRB(24, 4, 0, 0),
       child: Row(
         children: [
           const SizedBox(
@@ -102,56 +130,54 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Widget buildMenu() {
-    return Container(
-      height: 600,
-      child: ListView.builder(
-          physics: BouncingScrollPhysics(),
-          itemCount: list.length,
-          itemBuilder: (context, index) {
-            if (index == 0) {
-              return Column(
-                children: [
-                  Container(
-                    height: 57,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(27, 18, 24, 18),
-                      child: Row(
-                        children: [
-                          Icon(
-                            list[index].icon,
-                            color: AppColors.blue1,
+    return ListView.builder(
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return Column(
+              children: [
+                Container(
+                  height: 57,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(27, 18, 24, 18),
+                    child: Row(
+                      children: [
+                        Icon(
+                          list[index].icon,
+                          color: AppColors.blue1,
+                        ),
+                        const SizedBox(
+                          width: 19,
+                        ),
+                        Text(
+                          list[index].name,
+                          style: const TextStyle(
+                            fontSize: 14,
                           ),
-                          const SizedBox(
-                            width: 19,
-                          ),
-                          Text(
-                            list[index].name,
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                          const Spacer(),
-                          Switch(
-                            value: isSwitched,
-                            onChanged: (value) {
-                              setState(() {
-                                isSwitched = value;
-                              });
-                            },
-                          )
-                        ],
-                      ),
+                        ),
+                        const Spacer(),
+                        Switch(
+                          value: isSwitched,
+                          onChanged: (value) {
+                            setState(() {
+                              isSwitched = value;
+                            });
+                          },
+                        )
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 8),
-                ],
-              );
-            } else {
-              return MenuWidget(list[index]);
-            }
-          }),
-    );
+                ),
+                const SizedBox(height: 8),
+              ],
+            );
+          } else {
+            return MenuWidget(list[index]);
+          }
+        });
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:messaging/presentation/home_screen/pages/home_screen.dart';
+import 'package:messaging/presentation/home_screen/pages/home.dart';
 import 'package:messaging/presentation/resources/colors.dart';
 import 'package:sizer/sizer.dart';
 
@@ -23,9 +23,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) {
+        /*SystemChrome.setSystemUIOverlayStyle(
+            SystemUiOverlayStyle(statusBarColor: Colors.white));*/
         return MaterialApp(
           color: AppColors.white,
           debugShowCheckedModeBanner: false,
+          theme: ThemeData.light(),
           home: const SafeArea(
             child: HomeScreen(),
           ),

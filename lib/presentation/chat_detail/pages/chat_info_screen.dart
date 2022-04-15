@@ -6,6 +6,8 @@ import 'package:messaging/presentation/chat_detail/widgets/video_widget.dart';
 import 'package:messaging/presentation/resources/colors.dart';
 import 'package:messaging/presentation/resources/dimensions.dart';
 
+import '../widgets/document_widget.dart';
+
 class ChatInfoScreen extends StatefulWidget {
   const ChatInfoScreen({Key? key}) : super(key: key);
 
@@ -24,6 +26,7 @@ class _ChatInfoScreenState extends State<ChatInfoScreen> {
     return SafeArea(
       child: Scaffold(
         body: ListView(
+          physics: const BouncingScrollPhysics(),
           children: [
             _buildInfo(),
             const Divider(
@@ -54,12 +57,17 @@ class _ChatInfoScreenState extends State<ChatInfoScreen> {
           padding: const EdgeInsets.fromLTRB(19, 0, 26, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Icon(
-                Icons.chevron_left,
-                color: AppColors.text_secondary,
+            children: [
+              GestureDetector(
+                child: const Icon(
+                  Icons.chevron_left,
+                  color: AppColors.text_secondary,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
               ),
-              Text(
+              const Text(
                 'Liverpool Football Club',
                 style: TextStyle(
                   color: AppColors.text_primary,
@@ -67,7 +75,7 @@ class _ChatInfoScreenState extends State<ChatInfoScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Icon(
+              const Icon(
                 Icons.more_vert,
                 color: AppColors.text_secondary,
               ),
@@ -137,7 +145,7 @@ class _ChatInfoScreenState extends State<ChatInfoScreen> {
           Container(
             height: 50,
             child: ListView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               children: [
                 _buildItem(0, Icons.star_border_outlined, "Bookmarks"),
@@ -165,6 +173,7 @@ class _ChatInfoScreenState extends State<ChatInfoScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 17),
           child: Center(
               child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
@@ -200,9 +209,9 @@ class _ChatInfoScreenState extends State<ChatInfoScreen> {
       );
     }
     if (index == 2) {
-      return Expanded(child: const VideoWidget());
+      return Expanded(child: VideoWidget());
     } else {
-      return const Expanded(child: Text('Hello3'));
+      return Expanded(child: DocumentWidget());
     }
   }
 }

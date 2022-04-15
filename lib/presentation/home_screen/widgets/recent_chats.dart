@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:messaging/presentation/category/widgets/user_chat_widget.dart';
 import 'package:messaging/presentation/home_screen/widgets/chat_item_widget.dart';
 import 'package:messaging/presentation/home_screen/widgets/personal_widget.dart';
 import '../../resources/colors.dart';
@@ -15,19 +16,27 @@ class _RecentChatsWidgetState extends State<RecentChatsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            _buildItem(0, "All chats"),
-            _buildItem(1, "Personal"),
-            _buildItem(2, "Work"),
-            _buildItem(3, "Settings"),
-            const Spacer(),
-          ],
-        ),
-        _buildContent(_currentIndex)
-      ],
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          Container(
+            height: 40,
+            child: ListView(
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              children: [
+                _buildItem(0, "All chats"),
+                _buildItem(1, "Personal"),
+                _buildItem(2, "Work"),
+                _buildItem(3, "Settings"),
+              ],
+            ),
+          ),
+          _buildContent(_currentIndex)
+        ],
+      ),
     );
   }
 
@@ -51,7 +60,9 @@ class _RecentChatsWidgetState extends State<RecentChatsWidget> {
           child: Center(
             child: Text(
               text,
-              style: TextStyle(fontSize: 12, color: active ? AppColors.white : AppColors.text_primary),
+              style: TextStyle(
+                  fontSize: 12,
+                  color: active ? AppColors.white : AppColors.text_primary),
             ),
           ),
         ),
@@ -64,14 +75,12 @@ class _RecentChatsWidgetState extends State<RecentChatsWidget> {
       return ChatItemWidget();
     }
     if (index == 1) {
-      return const Expanded(
-        child: PersonalWidget(),
-      );
+      return const PersonalWidget();
     }
     if (index == 2) {
-      return const Expanded(child: Text('Hello2'));
+      return const UserChatWidget();
     } else {
-      return const Expanded(child: Text('Hello3'));
+      return const PersonalWidget();
     }
   }
 }

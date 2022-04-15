@@ -15,7 +15,7 @@ class BookmarksWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       child: Column(
         children: [
           Padding(
@@ -217,7 +217,7 @@ class BookmarksWidget extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  return const MemberWidget();
+                  return MemberWidget(index);
                 })
           ],
         ),

@@ -8,15 +8,18 @@ class CallHistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            _buildInfo(),
-            const Divider(
-              height: 1,
-              color: AppColors.divider,
-            ),
-            _buildHistoryCalls(),
-          ],
+        body: Container(
+          color: AppColors.white,
+          child: Column(
+            children: [
+              _buildInfo(),
+              const Divider(
+                height: 1,
+                color: AppColors.divider,
+              ),
+              _buildHistoryCalls(),
+            ],
+          ),
         ),
       ),
     );
@@ -65,7 +68,8 @@ class CallHistoryScreen extends StatelessWidget {
     return Expanded(
       child: ListView.builder(
           physics: const BouncingScrollPhysics(),
-          itemCount: 10,
+          shrinkWrap: true,
+          itemCount: 16,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.fromLTRB(17, 16, 19, 0),
@@ -77,11 +81,11 @@ class CallHistoryScreen extends StatelessWidget {
                     height: 13,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: AppColors.online,
+                      color: index % 2 == 0 ? AppColors.online : AppColors.red,
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Icon(
-                        Icons.call_received,
+                        index % 2 == 0 ? Icons.call_received : Icons.call_made,
                         color: AppColors.white,
                         size: 10,
                       ),
@@ -93,8 +97,10 @@ class CallHistoryScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Yesterday, 8:52, AM',
+                      Text(
+                        index % 2 == 0
+                            ? 'Yesterday, 8:52, AM'
+                            : '2 days ago, 4:28 PM',
                         style: TextStyle(
                           fontSize: 12,
                           color: AppColors.text_primary,
@@ -127,17 +133,11 @@ class CallHistoryScreen extends StatelessWidget {
                     ],
                   ),
                   const Spacer(),
-                  index % 2 == 0
-                      ? const Icon(
-                          Icons.call,
-                          color: AppColors.blue1,
-                          size: 26,
-                        )
-                      : const Icon(
-                          Icons.videocam,
-                          color: AppColors.blue1,
-                          size: 26,
-                        )
+                  Icon(
+                    index % 2 == 0 ? Icons.call : Icons.videocam,
+                    color: AppColors.blue1,
+                    size: 26,
+                  )
                 ],
               ),
             );
